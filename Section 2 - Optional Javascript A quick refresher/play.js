@@ -36,3 +36,70 @@ console.log( summarizeUser(name, age, hasHobbies) );
 
 // let name = "Max";
 // let age = 29;
+
+
+
+///////// Object and Arrays
+
+
+const person = {
+    name: 'Max',
+    age: 29,
+    greet() {
+        console.log('Hi, I am ' + this.name);
+    }
+};
+
+const copiedPerson = {...person};
+console.log(copiedPerson);
+console.log(person);
+
+person.greet();
+
+
+const hobbies = ['sports', 'cooking'];
+for(let hobby of hobbies) {
+    console.log(hobby);
+}
+
+//used to transform the elements in the array.
+console.log(hobbies.map(hobby => {
+    return 'Hobby: ' + hobby;
+}));
+// or
+// console.log(hobbies.map(hobby => 'Hobby: ' + hobby));
+
+// console.log(hobbies);
+
+
+hobbies.push('Programming');
+console.log(hobbies);
+
+const copiedArray = hobbies.slice();
+console.log(copiedArray);
+// or
+// const copiedArray = [hobbies];
+// console.log(copiedArray);
+
+
+const copiedArray_1 = [hobbies];
+console.log(copiedArray_1);
+
+
+ 
+
+
+// for some arguments
+const toArray = (arg1, arg2, arg3) => {
+    return [arg1, arg2, arg3];
+}
+
+console.log(toArray(1, 2, 3, 4));
+
+
+// for any number of arguments
+const toArray_1 = (...args) => {
+    return args;
+}
+
+console.log(toArray_1(1, 2, 3, 4));
