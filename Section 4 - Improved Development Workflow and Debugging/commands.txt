@@ -1,0 +1,9 @@
+npm install
+
+npm start
+
+npm run start-server //new scripts added in package.json
+
+npm install nodemon
+
+npm install nodemon --save-dev
