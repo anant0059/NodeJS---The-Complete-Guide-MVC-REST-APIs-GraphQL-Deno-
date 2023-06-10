@@ -7,3 +7,10 @@ npm run start-server //new scripts added in package.json
 npm install nodemon
 
 npm install nodemon --save-dev
+
+
+Debugging resources:
+
+https://nodejs.org/en/docs/guides/debugging-getting-started/
+
+https://code.visualstudio.com/docs/nodejs/nodejs-debugging
