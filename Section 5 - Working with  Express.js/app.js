@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -18,18 +19,49 @@ const app = express();
 
 /////////////// Handeling different routes
 
+// app.use('/', (req, res, next) => {
+//     console.log('This always runs!');
+//     next();
+// });
+
+// app.use('/add-product', (req, res, next) => {
+//     console.log("In another middleware");
+//     res.send('<h1>Add product page</h1>');
+// });
+
+// app.use('/', (req, res, next) => {
+//     console.log("In another middleware");
+//     res.send('<h1>Hello Form Express</h1>');
+// });
+
+// // const server = http.createServer(app);
+
+// app.listen(3001);  // this will aoutomatically return http.createServer(app);
+
+
+
+
+/////////////// Parsing incoming request
+
+app.use(bodyParser.urlencoded({extended: false}));
+
 app.use('/', (req, res, next) => {
-    console.log('This always runs!');
+    // console.log('This always runs!');
     next();
 });
 
 app.use('/add-product', (req, res, next) => {
-    console.log("In another middleware");
-    res.send('<h1>Add product page</h1>');
+    // console.log("In another middleware");
+    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">submit</button></form>');
+});
+
+app.post('/product', (req, res, next) => {
+    console.log(req.body);
+    res.redirect('/');
 });
 
 app.use('/', (req, res, next) => {
-    console.log("In another middleware");
+    // console.log("In another middleware");
     res.send('<h1>Hello Form Express</h1>');
 });
 
