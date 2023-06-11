@@ -41,29 +41,42 @@ const app = express();
 
 
 
-/////////////// Parsing incoming request
+// /////////////// Parsing incoming request
+
+// app.use(bodyParser.urlencoded({extended: false}));
+
+// app.use('/', (req, res, next) => {
+//     // console.log('This always runs!');
+//     next();
+// });
+
+// app.use('/add-product', (req, res, next) => {
+//     // console.log("In another middleware");
+//     res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">submit</button></form>');
+// });
+
+// app.post('/product', (req, res, next) => {
+//     console.log(req.body);
+//     res.redirect('/');
+// });
+
+// app.use('/', (req, res, next) => {
+//     // console.log("In another middleware");
+//     res.send('<h1>Hello Form Express</h1>');
+// });
+
+
+
+///////////////// Using express router
+
+const adminRoutes = require('./routes/admin.js');
+const shopRoutes = require('./routes/shop.js');
+
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/', (req, res, next) => {
-    // console.log('This always runs!');
-    next();
-});
-
-app.use('/add-product', (req, res, next) => {
-    // console.log("In another middleware");
-    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">submit</button></form>');
-});
-
-app.post('/product', (req, res, next) => {
-    console.log(req.body);
-    res.redirect('/');
-});
-
-app.use('/', (req, res, next) => {
-    // console.log("In another middleware");
-    res.send('<h1>Hello Form Express</h1>');
-});
+app.use(adminRoutes);
+app.use(shopRoutes);
 
 // const server = http.createServer(app);
 
