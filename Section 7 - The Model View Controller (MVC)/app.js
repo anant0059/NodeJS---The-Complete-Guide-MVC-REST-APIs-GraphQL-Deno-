@@ -3,27 +3,25 @@ const bodyParser = require('body-parser');
 const path = require('path');
 // const rootDir = require('./util/path');
 
+const errorController = require('./controllers/error');
+
 const app = express();
 
 
 app.set('view engine', 'ejs'); //set ejs as default templating engine
 app.set('views', 'views'); //set views as default path for the ejs files
 
-const adminData = require('./routes/admin.js');
+const adminRoutes = require('./routes/admin.js');
 const shopRoutes = require('./routes/shop.js');
 
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminData.routes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
-app.use((req, res, next) => {
-    // res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-
-    res.status(404).render('404', {pageTitle: "Page Not Found"});
-})
+app.use(errorController.get404);
 
 // const server = http.createServer(app);
 
