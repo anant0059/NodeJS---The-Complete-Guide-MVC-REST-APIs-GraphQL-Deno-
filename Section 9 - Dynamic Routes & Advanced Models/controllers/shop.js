@@ -4,33 +4,30 @@ const Product = require('../models/product');
 
 
 exports.getProducts = (req, res, next) => {
-    // console.log("In another middleware");
-    // console.log('shop.js', adminData.products);
-    // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
-
-    // const products = Product.fetchAll();
-    
-    // res.render('shop', {
-    //     prods: products, 
-    //     pageTitle: "Shop", 
-    //     path: '/', 
-    //     hasProducts: products.length > 0,
-    //     activeShop: true,
-    //     productCSS: true
-    // });
-
-
     Product.fetchAll(products => {
         res.render('shop/product-list', {
             prods: products, 
             pageTitle: "All Product", 
-            path: '/' //, 
+            path: '/products' //, 
             // hasProducts: products.length > 0,
             // activeShop: true,
             // productCSS: true
         });
     });
 };
+
+exports.getProduct = (req, res, next) => {
+    const prodId = req.params.productId;
+    // console.log(prodId);
+    Product.findById(prodId, product => {
+        // console.log(product);
+        res.render('shop/product-detail', {
+            product: product,
+            pageTitle: product.title,
+            path: '/products'
+        });
+    });
+}
 
 exports.getIndex = (req, res, next) => {
     Product.fetchAll(products => {
